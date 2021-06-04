@@ -99,6 +99,7 @@ fi
 
 # Start a cron process within the container
 if [ "${ENABLE_CRON,,}" == "true" ]; then
+  printenv >> /etc/environment
   php artisan schedule:run # required to prime db connection
   cron
   echo 'Cron enabled.'
