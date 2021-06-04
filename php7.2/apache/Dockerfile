@@ -43,6 +43,7 @@ RUN git clone https://github.com/octobercms/october.git -b $OCTOBERCMS_TAG --dep
   echo "Update composer.json: Set explicit build references for october module dependencies" && \
   sed -i.orig "s/\(\"october\/\([rain|system|backend|cms]*\)\": \"\(~1.0\)\"\)/\"october\/\2\": \"<=${OCTOBERCMS_TAG#v}\"/g" composer.json && \
   egrep -o "['\"]october\/[rain|system|backend|cms]*['\"]\s*:\s*['\"](.+?)['\"]" composer.json && \
+  composer require wikimedia/composer-merge-plugin "1.4.1" && \
   composer install --no-interaction --prefer-dist --no-scripts && \
   composer clearcache && \
   git status && git checkout modules/. && \
